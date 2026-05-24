@@ -37,11 +37,11 @@
             <div class="flex justify-between mb-4">
                 <div>
                     <div class="text-xs text-gray-400">TOTAL PORTFOLIO</div>
-                    <div class="text-5xl font-semibold" id="total">$616,000</div>
+                    <div class="text-5xl font-semibold" id="total">$488,440</div>
                 </div>
                 <div class="text-right">
                     <div class="text-xs text-gray-400">TO $5M GOAL</div>
-                    <div class="text-3xl font-semibold tesla-red" id="progress">12.3%</div>
+                    <div class="text-3xl font-semibold tesla-red" id="progress">9.8%</div>
                 </div>
             </div>
 
@@ -49,27 +49,28 @@
             <div class="space-y-4">
                 <div class="flex items-center gap-3">
                     <div class="w-20 text-sm">Eric</div>
-                    <input type="number" id="eric" value="450000" 
+                    <input type="number" id="eric" value="302085" 
                            class="flex-1 bg-[#2a2a2a] border border-[#444] rounded-2xl px-4 py-3 text-lg font-medium"
                            oninput="updatePortfolio()">
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="w-20 text-sm">Bridget</div>
-                    <input type="number" id="bridget" value="86000" 
+                    <input type="number" id="bridget" value="164423" 
                            class="flex-1 bg-[#2a2a2a] border border-[#444] rounded-2xl px-4 py-3 text-lg font-medium"
                            oninput="updatePortfolio()">
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="w-20 text-sm">Jensen</div>
-                    <input type="number" id="jensen" value="49000" 
+                    <input type="number" id="jensen" value="21932" 
                            class="flex-1 bg-[#2a2a2a] border border-[#444] rounded-2xl px-4 py-3 text-lg font-medium"
                            oninput="updatePortfolio()">
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="w-20 text-sm">Taylor</div>
-                    <input type="number" id="taylor" value="31000" 
+                    <input type="number" id="taylor" value="0" 
                            class="flex-1 bg-[#2a2a2a] border border-[#444] rounded-2xl px-4 py-3 text-lg font-medium"
                            oninput="updatePortfolio()">
+                    <div class="text-xs text-gray-500">(upload screenshot)</div>
                 </div>
             </div>
         </div>
@@ -77,10 +78,10 @@
         <!-- Progress Bar -->
         <div class="card p-5 mb-4">
             <div class="h-3 bg-[#333] rounded-full overflow-hidden mb-2">
-                <div id="progress-bar" class="h-3 bg-[#e31937] transition-all duration-500" style="width: 12.3%"></div>
+                <div id="progress-bar" class="h-3 bg-[#e31937] transition-all duration-500" style="width: 9.8%"></div>
             </div>
             <div class="flex justify-between text-xs text-gray-400">
-                <div id="current-total">$616,000</div>
+                <div id="current-total">$488,440</div>
                 <div>$5,000,000</div>
             </div>
         </div>
@@ -98,61 +99,4 @@
         </div>
 
         <div class="text-center text-[10px] text-gray-500">
-            v1.0 • Live TSLA • Ready to expand
-        </div>
-    </div>
-
-    <script>
-        // Live TSLA Price
-        async function fetchTSLA() {
-            try {
-                const res = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/TSLA?interval=1d&range=1d');
-                const data = await res.json();
-                const price = data.chart.result[0].meta.regularMarketPrice;
-                const change = data.chart.result[0].meta.regularMarketChangePercent;
-
-                document.getElementById('tsla-price').textContent = '$' + price.toFixed(2);
-                
-                const changeEl = document.getElementById('tsla-change');
-                changeEl.textContent = (change >= 0 ? '+' : '') + change.toFixed(2) + '%';
-                changeEl.className = change >= 0 ? 'text-emerald-400 text-sm' : 'text-red-400 text-sm';
-            } catch (e) {
-                console.log('TSLA fetch error');
-            }
-        }
-
-        // Update Portfolio
-        function updatePortfolio() {
-            const eric = parseFloat(document.getElementById('eric').value) || 0;
-            const bridget = parseFloat(document.getElementById('bridget').value) || 0;
-            const jensen = parseFloat(document.getElementById('jensen').value) || 0;
-            const taylor = parseFloat(document.getElementById('taylor').value) || 0;
-
-            const total = eric + bridget + jensen + taylor;
-            const goal = 5000000;
-            const progress = ((total / goal) * 100).toFixed(1);
-
-            document.getElementById('total').textContent = '$' + total.toLocaleString();
-            document.getElementById('progress').textContent = progress + '%';
-            document.getElementById('progress-bar').style.width = progress + '%';
-            document.getElementById('current-total').textContent = '$' + total.toLocaleString();
-        }
-
-        // Initialize
-        function init() {
-            fetchTSLA();
-            setInterval(fetchTSLA, 60000); // Update TSLA every 60 seconds
-            
-            // Set initial values
-            document.getElementById('eric').value = 450000;
-            document.getElementById('bridget').value = 86000;
-            document.getElementById('jensen').value = 49000;
-            document.getElementById('taylor').value = 31000;
-            
-            updatePortfolio();
-        }
-
-        init();
-    </script>
-</body>
-</html>
+            v1.0 • Live TSLA • Updated May 23
